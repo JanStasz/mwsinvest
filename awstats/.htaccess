@@ -1,0 +1,5 @@
+Options -Indexes
+
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www.mwsinvest.pl$ [NC]
+RewriteRule ^(.*)$ http://mwsinvest.pl/awstats/$1 [R=301,L]
