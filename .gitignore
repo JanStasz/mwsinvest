@@ -1,0 +1,6 @@
+# macOS system files
+.DS_Store
+
+# Local build tooling and generated review bundle (not needed on the web)
+build/
+mwsinvest-review.html

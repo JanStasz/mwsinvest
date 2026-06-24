@@ -1,0 +1,1029 @@
+/* ============================================================
+   MWS INVEST — stylesheet
+   Palette: white base, red highlight (shared by the Polish & Swiss
+   flags), near-black text. Modern, clean, single-page layout.
+   ============================================================ */
+
+/* ---------- 1. Design tokens (reusable variables) ---------- */
+:root {
+  --bg: #ffffff;
+  --surface: #f6f6f7;          /* light grey section background */
+  --dark: #111114;            /* dark section background */
+  --ink: #14141a;             /* main text colour (near-black) */
+  --muted: #6c6c76;           /* secondary text */
+  --line: #e9e9ec;            /* hairline borders */
+
+  --red: #e1121e;             /* primary highlight */
+  --red-dark: #b50d18;        /* hover state */
+
+  --maxw: 1240px;             /* max content width */
+  --radius: 14px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --font-head: "Manrope", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+/* ---------- 2. Base resets ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px; /* offset so anchors clear the fixed nav */
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-head);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+/* ---------- 3. Layout helpers ---------- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section {
+  padding: 120px 0;
+}
+
+.section--surface {
+  background: var(--surface);
+}
+
+.text-red {
+  color: var(--red);
+}
+
+/* Small uppercase label above headings */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 18px;
+}
+
+.eyebrow--light {
+  color: #ff5a63;
+}
+
+.section__title {
+  font-size: clamp(1.9rem, 4vw, 3.1rem);
+  max-width: 16ch;
+}
+
+.section__title--light {
+  color: #fff;
+}
+
+.lead {
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+
+p + p {
+  margin-top: 16px;
+}
+
+/* Shared header block for sections (title left, supporting text right) */
+.section__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  margin-bottom: 64px;
+}
+
+.section__head-text {
+  max-width: 38ch;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+/* The little ↗ arrow used on buttons/links */
+.arrow {
+  display: inline-block;
+  transition: transform 0.3s var(--ease);
+}
+
+/* ---------- 4. Buttons & links ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px;
+  border-radius: 999px;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.98rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.25s var(--ease), color 0.25s var(--ease),
+    border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.btn:hover .arrow {
+  transform: translate(3px, -3px);
+}
+
+.btn--primary {
+  background: var(--red);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: var(--red-dark);
+  transform: translateY(-2px);
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #fff;
+}
+
+.btn--full {
+  width: 100%;
+  justify-content: center;
+}
+
+.link-underline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-head);
+  font-weight: 600;
+  color: var(--ink);
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--red);
+  transition: gap 0.25s var(--ease);
+}
+
+.link-underline:hover {
+  gap: 14px;
+}
+
+/* ---------- 5. Navigation ---------- */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 22px 0;
+  transition: background 0.35s var(--ease), padding 0.35s var(--ease),
+    box-shadow 0.35s var(--ease);
+}
+
+/* When scrolled, JS adds .nav--solid → white bar with shadow */
+.nav--solid {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  padding: 14px 0;
+  box-shadow: 0 1px 0 var(--line);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav__logo {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.03em;
+  color: #fff; /* light over hero */
+  transition: color 0.35s var(--ease);
+}
+
+.nav--solid .nav__logo {
+  color: var(--ink);
+}
+
+.nav__logo-accent {
+  color: var(--red);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.nav__link {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.96rem;
+  color: rgba(255, 255, 255, 0.9);
+  transition: color 0.25s var(--ease);
+  position: relative;
+}
+
+.nav--solid .nav__link {
+  color: var(--ink);
+}
+
+/* animated underline on hover */
+.nav__link:not(.nav__link--cta)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease);
+}
+
+.nav__link:not(.nav__link--cta):hover::after {
+  transform: scaleX(1);
+}
+
+.nav__link--cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--red);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 999px;
+}
+
+.nav__link--cta:hover {
+  background: var(--red-dark);
+}
+
+.nav__link--cta:hover .arrow {
+  transform: translate(3px, -3px);
+}
+
+/* Hamburger (hidden on desktop) */
+.nav__burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.nav__burger span {
+  width: 26px;
+  height: 2px;
+  background: #fff;
+  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease),
+    background 0.35s var(--ease);
+}
+
+.nav--solid .nav__burger span {
+  background: var(--ink);
+}
+
+/* ---------- 6. Hero ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background: url("../assets/hero-warsaw-sunset.jpg") center/cover no-repeat;
+  /* slow zoom for a living feel */
+  animation: heroZoom 18s ease-out forwards;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 14, 0.55) 0%,
+    rgba(10, 10, 14, 0.45) 40%,
+    rgba(10, 10, 14, 0.78) 100%
+  );
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.hero__title {
+  font-size: clamp(2.6rem, 6.5vw, 5.4rem);
+  color: #fff;
+  margin-bottom: 26px;
+}
+
+.hero__subtitle {
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 46ch;
+  margin-bottom: 40px;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: 34px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-head);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 46px;
+  background: rgba(255, 255, 255, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__scroll-line::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: var(--red);
+  animation: scrollDot 1.8s var(--ease) infinite;
+}
+
+@keyframes heroZoom {
+  from {
+    transform: scale(1.12);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes scrollDot {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+
+/* ---------- 7. Stats ---------- */
+.stats {
+  padding: 70px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.stats__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.stat {
+  text-align: left;
+  padding: 16px 24px;
+  border-left: 2px solid var(--line);
+}
+
+.stat__num {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.stat__label {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+/* ---------- 8. About ---------- */
+.about__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.about__media {
+  position: relative;
+}
+
+.about__media img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.about__badge {
+  position: absolute;
+  left: -28px;
+  bottom: 36px;
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 20px 26px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.about__badge-num {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--red);
+}
+
+.about__badge-text {
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+/* ---------- 9. Focus cards ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 34px 28px;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease),
+    border-color 0.35s var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.1);
+  border-color: transparent;
+}
+
+.card__icon {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--red);
+  width: 46px;
+  height: 46px;
+  border: 1.5px solid var(--red);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin-bottom: 26px;
+}
+
+.card__title {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+
+.card__text {
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+/* ---------- 10. Markets / map ---------- */
+.markets__grid {
+  display: grid;
+  /* minmax(0,…) lets the map column shrink instead of being forced wide
+     by the SVG's large intrinsic size (a classic CSS grid gotcha). */
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+  gap: 56px;
+  align-items: center;
+}
+
+.map {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  z-index: 1;
+}
+
+.markets__info {
+  position: relative;
+  z-index: 2;
+}
+
+.map__loading {
+  color: var(--muted);
+  text-align: center;
+  padding: 80px 0;
+}
+
+.europe-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* overflow:hidden keeps countries that extend past the frame
+     (Scandinavia, Russia…) from bleeding onto other content. */
+  overflow: hidden;
+  /* Fade only the TOP and RIGHT edges. Two gradients combined with
+     mask-composite: the vertical one dissolves the top, the horizontal
+     one dissolves the right. Long, gentle ranges = soft fade. Left and
+     bottom stay fully opaque (their gradients never reach transparent). */
+  -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0,
+      #000 42%
+    ),
+    linear-gradient(to right, #000 82%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to bottom, transparent 0, #000 42%),
+    linear-gradient(to right, #000 82%, transparent 100%);
+  mask-composite: intersect;
+}
+
+/* every country: subtle light-grey silhouette */
+.europe-map .country {
+  fill: #e3e3e8;
+  stroke: #ffffff;
+  stroke-width: 1;
+  transition: fill 0.3s var(--ease);
+}
+
+.europe-map .country:hover {
+  fill: #cfcfd6;
+}
+
+/* highlighted markets */
+.europe-map .country.is-highlight {
+  fill: var(--red);
+}
+
+.europe-map .country.is-highlight:hover {
+  fill: var(--red-dark);
+}
+
+/* dim non-highlighted when a market card is hovered */
+.map.is-focused .country:not(.is-highlight) {
+  fill: #ebebef;
+}
+
+.markets__info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.market-card {
+  display: flex;
+  gap: 20px;
+  text-align: left;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease),
+    transform 0.3s var(--ease);
+}
+
+.market-card:hover {
+  border-color: var(--red);
+  box-shadow: 0 16px 40px rgba(225, 18, 30, 0.12);
+  transform: translateY(-4px);
+}
+
+.market-card__flag {
+  flex: 0 0 46px;
+  width: 46px;
+  height: 32px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* Poland: white over red */
+.market-card__flag--pl {
+  background: linear-gradient(180deg, #fff 0 50%, var(--red) 50% 100%);
+  border: 1px solid var(--line);
+}
+
+/* Switzerland: red with white cross */
+.market-card__flag--ch {
+  background: var(--red);
+  position: relative;
+}
+
+.market-card__flag--ch::before,
+.market-card__flag--ch::after {
+  content: "";
+  position: absolute;
+  background: #fff;
+}
+
+.market-card__flag--ch::before {
+  width: 40%;
+  height: 12%;
+  top: 44%;
+  left: 30%;
+}
+
+.market-card__flag--ch::after {
+  width: 12%;
+  height: 40%;
+  top: 30%;
+  left: 44%;
+}
+
+.market-card__title {
+  font-size: 1.35rem;
+  margin-bottom: 8px;
+}
+
+.market-card__text {
+  color: var(--muted);
+  font-size: 0.96rem;
+  margin-bottom: 14px;
+}
+
+.market-card__tag {
+  display: inline-block;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--red);
+  background: rgba(225, 18, 30, 0.08);
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+/* ---------- 11. Approach (dark section) ---------- */
+.section--dark {
+  background: var(--dark);
+}
+
+.approach__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.approach__item {
+  background: var(--dark);
+  padding: 44px 40px;
+  transition: background 0.35s var(--ease);
+}
+
+.approach__item:hover {
+  background: #1a1a20;
+}
+
+.approach__num {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--red);
+}
+
+.approach__title {
+  color: #fff;
+  font-size: 1.45rem;
+  margin: 16px 0 12px;
+}
+
+.approach__text {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+}
+
+/* ---------- 12. Contact ---------- */
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+}
+
+.contact__offices {
+  display: flex;
+  gap: 56px;
+  margin-top: 40px;
+}
+
+.office__city {
+  font-family: var(--font-head);
+  font-size: 1.15rem;
+}
+
+.office__addr {
+  color: var(--muted);
+  margin: 4px 0 8px;
+}
+
+.office__mail {
+  color: var(--red);
+  font-weight: 600;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s var(--ease);
+}
+
+.office__mail:hover {
+  border-color: var(--red);
+}
+
+.contact__form {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 40px;
+}
+
+.field {
+  margin-bottom: 20px;
+}
+
+.field label {
+  display: block;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background: #fff;
+  color: var(--ink);
+  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(225, 18, 30, 0.12);
+}
+
+.form__note {
+  margin-top: 14px;
+  font-size: 0.95rem;
+  color: var(--red);
+  min-height: 1.2em;
+}
+
+/* ---------- 13. Footer ---------- */
+.footer {
+  background: var(--dark);
+  padding: 56px 0;
+}
+
+.footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer__logo {
+  color: #fff;
+}
+
+.footer__links {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.footer__links a {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  transition: color 0.25s var(--ease);
+}
+
+.footer__links a:hover {
+  color: #fff;
+}
+
+.footer__copy {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.9rem;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 22px;
+  margin-top: 4px;
+}
+
+/* ---------- 14. Scroll-reveal animation ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* stagger children a touch when several reveal together */
+.cards .reveal.is-visible:nth-child(2) { transition-delay: 0.08s; }
+.cards .reveal.is-visible:nth-child(3) { transition-delay: 0.16s; }
+.cards .reveal.is-visible:nth-child(4) { transition-delay: 0.24s; }
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================================
+   15. Responsive
+   ============================================================ */
+@media (max-width: 980px) {
+  .section {
+    padding: 84px 0;
+  }
+  .section__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 44px;
+  }
+  .stats__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 16px;
+  }
+  .about__grid,
+  .markets__grid,
+  .contact__grid {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+  .about__media img {
+    height: 380px;
+  }
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .approach__list {
+    grid-template-columns: 1fr;
+  }
+  .map {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* mobile nav menu */
+  .nav__burger {
+    display: flex;
+  }
+  .nav__links {
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: min(78vw, 320px);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 28px;
+    padding: 40px;
+    background: #fff;
+    box-shadow: -20px 0 60px rgba(0, 0, 0, 0.18);
+    transform: translateX(100%);
+    transition: transform 0.4s var(--ease);
+  }
+  .nav__links.is-open {
+    transform: translateX(0);
+  }
+  .nav__link {
+    color: var(--ink) !important;
+    font-size: 1.2rem;
+  }
+  .nav--menu-open .nav__burger span {
+    background: var(--ink);
+  }
+  .nav--menu-open .nav__burger span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav--menu-open .nav__burger span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav--menu-open .nav__burger span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
+@media (max-width: 560px) {
+  .container {
+    padding: 0 18px;
+  }
+  .stats__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cards {
+    grid-template-columns: 1fr;
+  }
+  .contact__offices {
+    flex-direction: column;
+    gap: 28px;
+  }
+  .contact__form {
+    padding: 28px 22px;
+  }
+  .about__badge {
+    left: 0;
+  }
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn {
+    justify-content: center;
+  }
+}

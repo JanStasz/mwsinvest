@@ -1,0 +1,39 @@
+# Publishes the site in public_html/ to GitHub Pages on every push to main.
+name: Deploy to GitHub Pages
+
+on:
+  # Run automatically when you push to the main branch
+  push:
+    branches: [main]
+  # ...and allow running it manually from the Actions tab
+  workflow_dispatch:
+
+# Permissions the job needs to publish Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# If you push twice quickly, cancel the older run and keep the newest
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Upload the site (only the public_html folder)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public_html
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
