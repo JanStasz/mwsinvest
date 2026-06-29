@@ -9,11 +9,12 @@
       content="MWS Invest is an independent investment company allocating capital across Poland and Switzerland with discipline, discretion and a long-term view."
     />
 
-    <!-- Fonts: Manrope for headings, Inter for body text -->
+    <!-- Fonts: Manrope for headings, Inter for body text,
+         Playfair Display (italic) reserved only for the pull-quote -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700;800&family=Playfair+Display:ital@1&display=swap"
       rel="stylesheet"
     />
 
@@ -29,6 +30,7 @@
 
         <nav class="nav__links" id="navLinks">
           <a href="#about" class="nav__link">About</a>
+          <a href="#values" class="nav__link">Values</a>
           <a href="#focus" class="nav__link">What We Do</a>
           <a href="#markets" class="nav__link">Markets</a>
           <a href="#approach" class="nav__link">Approach</a>
@@ -51,16 +53,17 @@
       <div class="hero__overlay"></div>
 
       <div class="container hero__content">
-        <p class="eyebrow eyebrow--light reveal">Poland &nbsp;&bull;&nbsp; Switzerland</p>
-        <h1 class="hero__title reveal">
-          Capital with <span class="text-red">conviction.</span><br />
-          Growth with <span class="text-red">discipline.</span>
+        <h1 class="hero__title hero-fade">
+          A family's capital,<br />
+          stewarded with <span class="text-red">conviction.</span>
         </h1>
-        <p class="hero__subtitle reveal">
-          MWS Invest is an independent investment company building lasting value
-          across two of Europe's most resilient economies.
+        <div class="hero__divider hero-fade" aria-hidden="true"></div>
+        <p class="hero__subtitle hero-fade">
+          MWS Invest is a family-owned investment company building enduring
+          value across Poland and Switzerland — patient by nature, principled
+          by choice, and personal in every decision we make.
         </p>
-        <div class="hero__actions reveal">
+        <div class="hero__actions hero-fade">
           <a href="#focus" class="btn btn--primary">
             Explore our focus <span class="arrow">&#8599;</span>
           </a>
@@ -68,32 +71,10 @@
         </div>
       </div>
 
-      <a href="#stats" class="hero__scroll" aria-label="Scroll down">
+      <a href="#about" class="hero__scroll" aria-label="Scroll down">
         <span class="hero__scroll-line"></span>
         Scroll
       </a>
-    </section>
-
-    <!-- ===================== STATS ===================== -->
-    <section class="stats" id="stats">
-      <div class="container stats__grid">
-        <div class="stat reveal">
-          <div class="stat__num"><span class="count" data-target="2">0</span></div>
-          <div class="stat__label">Core markets</div>
-        </div>
-        <div class="stat reveal">
-          <div class="stat__num"><span class="count" data-target="20">0</span>+</div>
-          <div class="stat__label">Years of experience</div>
-        </div>
-        <div class="stat reveal">
-          <div class="stat__num">&euro;<span class="count" data-target="150">0</span>M+</div>
-          <div class="stat__label">Capital deployed</div>
-        </div>
-        <div class="stat reveal">
-          <div class="stat__num"><span class="count" data-target="30">0</span>+</div>
-          <div class="stat__label">Completed transactions</div>
-        </div>
-      </div>
     </section>
 
     <!-- ===================== ABOUT ===================== -->
@@ -102,17 +83,18 @@
         <div class="about__text">
           <p class="eyebrow reveal">About MWS Invest</p>
           <h2 class="section__title reveal">
-            An independent partner for serious, long-term capital.
+            A family partner for serious, long-term capital.
           </h2>
           <p class="lead reveal">
-            We invest where we have deep roots and real conviction. Operating
-            from Warsaw and Switzerland, we combine local insight with
-            international standards to identify opportunities others overlook.
+            We invest where we have deep roots and real conviction. Rooted in
+            Poland and Switzerland, we combine local insight with international
+            standards to identify opportunities others overlook.
           </p>
           <p class="reveal">
             Our approach is patient and hands-on. We back resilient businesses
             and well-located real estate, protect the downside, and let
-            disciplined decisions compound over time.
+            disciplined decisions compound — for our family, and the partners
+            who invest alongside us.
           </p>
           <a href="#approach" class="link-underline reveal">
             How we work <span class="arrow">&#8599;</span>
@@ -128,8 +110,72 @@
           />
           <div class="about__badge">
             <span class="about__badge-num">Est.</span>
-            <span class="about__badge-text">Warsaw &amp; Switzerland</span>
+            <span class="about__badge-text">Poland &amp; Switzerland</span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== VALUES ===================== -->
+    <section class="section--dark values" id="values">
+      <div class="values__inner">
+        <!-- Family photo (used as provided), full-bleed with a black gradient -->
+        <div class="values__media reveal">
+          <img
+            src="assets/family.png"
+            alt="The MWS Invest family"
+            loading="lazy"
+          />
+          <figure class="values__quote">
+            <blockquote>
+              Family is where every lasting investment begins.
+            </blockquote>
+          </figure>
+        </div>
+
+        <div class="values__text">
+          <p class="eyebrow eyebrow--light reveal">What We Value</p>
+          <h2 class="section__title section__title--light reveal">
+            A family name behind every decision.
+          </h2>
+          <p class="lead lead--light reveal">
+            We are not a fund chasing the next quarter. We are a family investing
+            our own capital with care — and the values that guide us at home are
+            the same ones that guide us at the table.
+          </p>
+
+          <ul class="values__list">
+            <li class="value reveal">
+              <span class="value__mark">01</span>
+              <div>
+                <h3 class="value__title">Family first</h3>
+                <p class="value__text">
+                  Our name is on every commitment. We invest as owners, for the
+                  long horizon, and treat partners as part of the family.
+                </p>
+              </div>
+            </li>
+            <li class="value reveal">
+              <span class="value__mark">02</span>
+              <div>
+                <h3 class="value__title">Integrity &amp; discretion</h3>
+                <p class="value__text">
+                  Trust is earned quietly. We hold ourselves to the highest
+                  standard of honesty, confidentiality and respect.
+                </p>
+              </div>
+            </li>
+            <li class="value reveal">
+              <span class="value__mark">03</span>
+              <div>
+                <h3 class="value__title">Patience over noise</h3>
+                <p class="value__text">
+                  We think in generations, not headlines, letting sound decisions
+                  compound steadily over time.
+                </p>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
@@ -140,7 +186,7 @@
         <div class="section__head">
           <div>
             <p class="eyebrow reveal">What We Do</p>
-            <h2 class="section__title reveal">Four ways we create value.</h2>
+            <h2 class="section__title reveal">Three ways we create value.</h2>
           </div>
           <p class="section__head-text reveal">
             A focused mandate across the asset classes we understand best —
@@ -148,38 +194,33 @@
           </p>
         </div>
 
-        <div class="cards">
-          <article class="card reveal">
-            <div class="card__icon">01</div>
-            <h3 class="card__title">Private Equity</h3>
-            <p class="card__text">
+        <div class="offer">
+          <article class="offer__row reveal">
+            <span class="offer__num">01</span>
+            <h3 class="offer__title">Private Equity</h3>
+            <p class="offer__text">
               Growth and buyout capital for established mid-market companies with
               strong fundamentals and room to scale.
             </p>
+            <span class="offer__arrow arrow" aria-hidden="true">&#8599;</span>
           </article>
-          <article class="card reveal">
-            <div class="card__icon">02</div>
-            <h3 class="card__title">Real Estate</h3>
-            <p class="card__text">
+          <article class="offer__row reveal">
+            <span class="offer__num">02</span>
+            <h3 class="offer__title">Real Estate</h3>
+            <p class="offer__text">
               Well-located residential and commercial assets in prime Polish and
               Swiss locations, held for income and appreciation.
             </p>
+            <span class="offer__arrow arrow" aria-hidden="true">&#8599;</span>
           </article>
-          <article class="card reveal">
-            <div class="card__icon">03</div>
-            <h3 class="card__title">Venture &amp; Growth</h3>
-            <p class="card__text">
+          <article class="offer__row reveal">
+            <span class="offer__num">03</span>
+            <h3 class="offer__title">Venture &amp; Growth</h3>
+            <p class="offer__text">
               Selective early-stage positions in technology and innovation, backing
               founders building category leaders.
             </p>
-          </article>
-          <article class="card reveal">
-            <div class="card__icon">04</div>
-            <h3 class="card__title">Advisory</h3>
-            <p class="card__text">
-              Strategic guidance on cross-border transactions, structuring and
-              capital allocation between our two core markets.
-            </p>
+            <span class="offer__arrow arrow" aria-hidden="true">&#8599;</span>
           </article>
         </div>
       </div>
@@ -209,27 +250,21 @@
 
           <div class="markets__info">
             <button class="market-card reveal" data-country="PL">
-              <div class="market-card__flag market-card__flag--pl" aria-hidden="true"></div>
-              <div class="market-card__body">
-                <h3 class="market-card__title">Poland</h3>
-                <p class="market-card__text">
-                  One of Europe's fastest-growing economies — a deep talent pool,
-                  expanding domestic market and resilient growth story.
-                </p>
-                <span class="market-card__tag">Growth engine</span>
-              </div>
+              <span class="market-card__label">Growth engine</span>
+              <h3 class="market-card__title">Poland</h3>
+              <p class="market-card__text">
+                One of Europe's fastest-growing economies — a deep talent pool,
+                expanding domestic market and resilient growth story.
+              </p>
             </button>
 
             <button class="market-card reveal" data-country="CH">
-              <div class="market-card__flag market-card__flag--ch" aria-hidden="true"></div>
-              <div class="market-card__body">
-                <h3 class="market-card__title">Switzerland</h3>
-                <p class="market-card__text">
-                  A global benchmark for stability, governance and capital
-                  preservation — the bedrock of our long-term portfolio.
-                </p>
-                <span class="market-card__tag">Stability anchor</span>
-              </div>
+              <span class="market-card__label">Stability anchor</span>
+              <h3 class="market-card__title">Switzerland</h3>
+              <p class="market-card__text">
+                A global benchmark for stability, governance and capital
+                preservation — the bedrock of our long-term portfolio.
+              </p>
             </button>
           </div>
         </div>
@@ -339,6 +374,7 @@
         </a>
         <nav class="footer__links">
           <a href="#about">About</a>
+          <a href="#values">Values</a>
           <a href="#focus">What We Do</a>
           <a href="#markets">Markets</a>
           <a href="#approach">Approach</a>

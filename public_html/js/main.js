@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
   setupNav();
   setupMobileMenu();
   setupScrollReveal();
-  setupCounters();
   setupContactForm();
   setupMap();
 
@@ -71,41 +70,7 @@ function setupScrollReveal() {
   items.forEach((el) => observer.observe(el));
 }
 
-/* ---------- 4. Animated number counters ---------- */
-function setupCounters() {
-  const counters = document.querySelectorAll(".count");
-
-  const animate = (el) => {
-    const target = Number(el.dataset.target);
-    const duration = 1500; // ms
-    const start = performance.now();
-
-    const tick = (now) => {
-      const progress = Math.min((now - start) / duration, 1);
-      // ease-out so it slows down near the end
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(target * eased);
-      if (progress < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  };
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animate(entry.target);
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.6 }
-  );
-
-  counters.forEach((el) => observer.observe(el));
-}
-
-/* ---------- 5. Contact form (front-end only demo) ---------- */
+/* ---------- 4. Contact form (front-end only demo) ---------- */
 function setupContactForm() {
   const form = document.getElementById("contactForm");
   const note = document.getElementById("formNote");
